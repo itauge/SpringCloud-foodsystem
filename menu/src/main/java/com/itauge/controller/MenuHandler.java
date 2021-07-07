@@ -30,4 +30,9 @@ public class MenuHandler {
     public List<Menu> findAll(@PathVariable("index") int index, @PathVariable("limit") int limit){
         return menurepository.findAll(index,limit);
     }
+
+    @GetMapping("/countall")
+    public int countAll(){
+        return menurepository.count();
+    }
 }

@@ -20,8 +20,9 @@ public class ClientHandler {
     @GetMapping("/findall")
     public MenuVO findAll(@RequestParam("page")int page, @RequestParam("limit") int limit){
         int index = (page-1)*limit;
-        List<Menu> all = menuFeign.findAll(index, limit);
-        MenuVO menuVO = new MenuVO(0, "", 100, all);
+        List<Menu> all = menuFeign.findAll(index,limit);
+        int count = menuFeign.count();
+        MenuVO menuVO = new MenuVO(0, "",count, all);
         return menuVO;
     }
 

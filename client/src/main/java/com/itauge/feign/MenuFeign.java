@@ -12,4 +12,7 @@ public interface MenuFeign {
 
     @GetMapping("/menu/findall/{index}/{limit}")
     public List<Menu> findAll(@PathVariable("index") int index, @PathVariable("limit") int limit);
+
+    @GetMapping("/menu/countall")
+    public int count();
 }

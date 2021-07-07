@@ -1,9 +1,6 @@
 package com.itauge.repository;
 
 import com.itauge.entity.Menu;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
