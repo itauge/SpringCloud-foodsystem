@@ -5,7 +5,7 @@ import com.itauge.entity.Menu;
 import java.util.List;
 
 
-public interface Menurepository {
+public interface MenuDao {
     public List<Menu> findAll(int index,int limit);
     public int count();
     public Menu findById(long id);

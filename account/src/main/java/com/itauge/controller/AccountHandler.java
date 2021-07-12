@@ -1,5 +1,7 @@
 package com.itauge.controller;
 
+import com.itauge.entity.Admin;
+import com.itauge.entity.User;
 import com.itauge.repository.AdminRepository;
 
 import com.itauge.repository.UserDao;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/account")
-public class AccountHandler {
+public class AccountHandler<T> {
 
     @Autowired
     public UserDao userDao;
@@ -23,6 +25,7 @@ public class AccountHandler {
     public Object login(@PathVariable("username") String username,
                         @PathVariable("password") String password,
                         @PathVariable("type") String type){
+
         Object object = null;
         switch (type){
             case "user":
@@ -32,9 +35,7 @@ public class AccountHandler {
                 object = adminRepository.login(username,password);
                 break;
         }
-
         return object;
-
     }
 
 }

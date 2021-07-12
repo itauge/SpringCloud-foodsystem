@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itauge.repository.MenuDao">
+
+    <resultMap id="menuMap" type="com.itauge.entity.Menu">
+        <association property="type" select="com.itauge.repository.TypeDao.findById" column="tid" />
+    </resultMap>
+
+    <insert id="save">
+        insert into t_menu values(null,#{name},#{price},#{flavor},#{type.id})
+    </insert>
+
+    <update id="update">
+        update t_menu set name=#{name},price=#{price},flavor=#{flavor},tid=#{type.id} where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from t_menu where id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="menuMap">
+        select * from t_menu limit #{param1},#{param2}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(id) from t_menu
+    </select>
+
+    <select id="findById" resultMap="menuMap">
+        select * from t_menu where id = #{id}
+    </select>
+</mapper>

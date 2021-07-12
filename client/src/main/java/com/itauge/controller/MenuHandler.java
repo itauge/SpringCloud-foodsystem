@@ -3,6 +3,7 @@ package com.itauge.controller;
 import com.itauge.entity.Menu;
 import com.itauge.entity.MenuVO;
 import com.itauge.feign.MenuFeign;
+import com.itauge.feign.OrderFeign;
 import org.bouncycastle.math.raw.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class MenuHandler {
 
     @Autowired
     private MenuFeign menuFeign;
+
+    @Autowired
+    private OrderFeign orderFeign;
 
     @ResponseBody
     @GetMapping("/findall")
@@ -38,7 +42,7 @@ public class MenuHandler {
     @GetMapping("/deleteById/{id}")
     public String deleteById(@PathVariable("id") long id){
         menuFeign.deleteById(id);
-        return "redirect:/menu/redirect/index";
+        return "redirect:/menu/redirect/menu_manager";
     }
 
     @GetMapping("/findTypes")
@@ -52,7 +56,7 @@ public class MenuHandler {
     @PostMapping("/save")
     public String save(Menu menu){
         menuFeign.save(menu);
-        return "redirect:/menu/redirect/index";
+        return "redirect:/menu/redirect/menu_manager";
     }
 
     @GetMapping("/findById/{id}")
@@ -66,8 +70,9 @@ public class MenuHandler {
 
     @PostMapping("/update")
     public String update(Menu menu){
+
         menuFeign.update(menu);
-        return "redirect:/menu/redirect/index";
+        return "redirect:/menu/redirect/menu_manager";
     }
 
 }

@@ -3,10 +3,7 @@ package com.itauge.feign;
 import com.itauge.entity.Menu;
 import com.itauge.entity.Type;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public interface MenuFeign {
     @GetMapping("/menu/countall")
     public int count();
 
-    @GetMapping("/menu/deleteById/{id}")
+    @DeleteMapping("/menu/deleteById/{id}")
     public void deleteById(@PathVariable("id") long id);
 
     @GetMapping("/menu/findTypes")

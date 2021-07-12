@@ -2,11 +2,9 @@ package com.itauge.controller;
 
 import com.itauge.entity.Menu;
 import com.itauge.entity.Type;
-import com.itauge.repository.Menurepository;
+import com.itauge.repository.MenuRepository;
 import com.itauge.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,17 +14,9 @@ import java.util.List;
 public class MenuHandler {
 
     @Autowired
-    Menurepository menurepository;
+    MenuRepository menurepository;
     @Autowired
     TypeRepository typeRepository;
-
-    @Value("${server.port}")
-    private String port;
-
-    @GetMapping("/index")
-    public String index(){
-        return this.port;
-    }
 
     @GetMapping("/findall/{index}/{limit}")
     public List<Menu> findAll(@PathVariable("index") int index, @PathVariable("limit") int limit){
@@ -38,8 +28,8 @@ public class MenuHandler {
         return menurepository.count();
     }
 
-    @GetMapping("/deleteById/{id}")
-    public void deleteByid(@PathVariable("id") long id){
+    @DeleteMapping("/deleteById/{id}")
+    public void deleteById(@PathVariable("id") long id){
         menurepository.deleteById(id);
     }
 

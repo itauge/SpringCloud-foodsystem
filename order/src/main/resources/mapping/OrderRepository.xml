@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itauge.repository.OrderRepository">
+
+    <resultMap id="orderMap" type="com.itauge.entity.Order">
+        <association property="menu" select="com.itauge.repository.MenuDao.findById" column="mid"></association>
+        <association property="user" select="com.itauge.repository.UserRepository.findById" column="uid"></association>
+    </resultMap>
+    
+    <insert id="save">
+        insert into t_order(uid,mid,date,state) values(#{user.id},#{menu.id},#{date},0)
+    </insert>
+
+    <select id="findAllByUid" resultMap="orderMap">
+        select id,mid,date,state from t_order where uid = #{param3} limit #{param1},#{param2}
+    </select>
+
+    <select id="countByUid" resultType="int">
+        select count(*) from t_order where uid = #{param1}
+    </select>
+
+    <select id="findAllByState" resultMap="orderMap">
+        select id,mid,uid,date,state from t_order where state = 0 limit #{param1},#{param2}
+    </select>
+
+    <select id="countByState" resultType="java.lang.Integer">
+        select count(*) from t_order where state = 0
+    </select>
+
+    <update id="updateState">
+        update t_order set state = 1 where id = #{id}
+    </update>
+</mapper>
